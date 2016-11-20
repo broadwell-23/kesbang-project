@@ -8,6 +8,12 @@
                           <i class="fa fa-home"></i>
                           <span>Beranda</span>
                       </a>
+                  </li>
+                  <li>
+                      <a href="/admin/user">
+                          <i class="fa fa-user"></i>
+                          <span>User</span>
+                      </a>
                   </li> 
                   <li>
                       <a href="/admin/page">

@@ -46,6 +46,7 @@
 
     <!--common script for all pages-->
     <!-- <script src="js/common-scripts.js"></script> -->
+
     @stack('js')
   </body>
 </html>
