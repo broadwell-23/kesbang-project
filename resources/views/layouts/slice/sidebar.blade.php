@@ -4,50 +4,50 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
                   <li>
-                      <a href="/voyages?">
-                          <i class="fa fa-paper-plane"></i>
+                      <a href="/admin/dashboard">
+                          <i class="fa fa-home"></i>
                           <span>Beranda</span>
                       </a>
                   </li> 
                   <li>
-                      <a href="/food-plans?success=1">
-                          <i class="fa fa-spoon"></i>
+                      <a href="/admin/page">
+                          <i class="fa fa-clone"></i>
                           <span>Halaman</span>
                       </a>
                   </li>
                   <li>
-                      <a href="#">
-                          <i class="fa fa-cube"></i>
+                      <a href="/admin/page">
+                          <i class="fa  fa-thumb-tack"></i>
                           <span>Postingan</span>
                       </a>
                   </li>
                   <li>
                       <a href="#">
-                          <i class="fa fa-file-text"></i>
+                          <i class="fa  fa-list"></i>
                           <span>Menu</span>
                       </a>
                   </li>
                   <li>
                       <a href="#">
-                          <i class="fa fa-sign-out"></i>
+                          <i class="fa fa-commenting"></i>
                           <span>Komentar</span>
                       </a>
                   </li>
                   <li>
                       <a href="#">
-                          <i class="fa fa-leaf"></i>
+                          <i class="fa fa-exchange"></i>
                           <span>Slide</span>
                       </a>
                   </li>
                   <li>
                       <a href="#">
-                          <i class="fa fa-leaf"></i>
+                          <i class="fa fa-puzzle-piece"></i>
                           <span>Sidebar Widget</span>
                       </a>
                   </li>
                   <li>
                       <a href="#">
-                          <i class="fa fa-leaf"></i>
+                          <i class="fa fa-wrench"></i>
                           <span>Pengaturan Tampilan</span>
                       </a>
                   </li>
