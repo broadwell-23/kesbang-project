@@ -35,7 +35,7 @@
         <h2 class="form-signin-heading">sign in now</h2>
         <div class="login-wrap">
             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                <input type="text" class="form-control" name="email" placeholder="Username" value="{{ old('email') }}" autofocus>
+                <input type="text" class="form-control" name="email" placeholder="Email" value="{{ old('email') }}" autofocus>
                 <div>
                     @if ($errors->has('email'))
                                     <span class="help-block">

@@ -7,7 +7,11 @@ use App\pages;
 
 class pageController extends Controller
 {
-
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function data()
     {
         $page = pages::all();

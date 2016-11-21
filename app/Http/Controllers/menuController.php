@@ -6,7 +6,11 @@ use Illuminate\Http\Request;
 use App\navbars;
 class menuController extends Controller
 {
-
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function tampil()
     {
     	$navbars = navbars::all();

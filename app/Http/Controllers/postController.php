@@ -9,7 +9,11 @@ use App\postcategorys;
 
 class postController extends Controller
 {
-
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function dataNew()
     {
             $judul = "Tambah";

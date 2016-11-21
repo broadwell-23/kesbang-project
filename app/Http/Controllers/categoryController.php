@@ -6,7 +6,11 @@ use Illuminate\Http\Request;
 use App\categorys;
 class categoryController extends Controller
 {
-
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function data()
     {
         $categorys = categorys::all();

@@ -33,7 +33,7 @@
                       </ul>
                   </li>
                   <li>
-                      <a href="#">
+                      <a href="/admin/menu">
                           <i class="fa  fa-list"></i>
                           <span>Menu</span>
                       </a>
