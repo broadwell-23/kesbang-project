@@ -15,15 +15,11 @@ class CreateNavbar extends Migration
     {
         Schema::create('navbars', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nama');
+            $table->string('text');
             $table->string('link');
-            $table->integer('id_category')->unsigned();
-            $table->foreign('id_category')->references('id')->on('categorys')->onUpdate('cascade')->onDelete('cascade');
-            $table->integer('id_pages')->unsigned();
-            $table->unique('id_pages');
-            $table->foreign('id_pages')->references('id')->on('pages')->onUpdate('cascade')->onDelete('cascade');
+            $table->integer('parent')->nullable()->unsigned();
+            $table->foreign('parent')->references('id')->on('navbars')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

@@ -24,7 +24,7 @@ class CreateComment extends Migration
             $table->string('judul');
             $table->longText('deskripsi');
             $table->boolean('read');
-            $table->integer('parent')->unsigned();
+            $table->integer('parent')->nullable()->unsigned();
             $table->foreign('parent')->references('id')->on('comments')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();

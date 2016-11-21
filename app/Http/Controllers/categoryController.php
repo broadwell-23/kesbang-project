@@ -7,7 +7,7 @@ use App\categorys;
 class categoryController extends Controller
 {
 
-    public function data($value='')
+    public function data()
     {
         $categorys = categorys::all();
         return $categorys;

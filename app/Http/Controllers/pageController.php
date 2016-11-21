@@ -7,6 +7,13 @@ use App\pages;
 
 class pageController extends Controller
 {
+
+    public function data()
+    {
+        $page = pages::all();
+        return $page;
+    }
+
 	public function dataNew()
 	{
 		$judul="Tambah";

@@ -27,6 +27,12 @@ Route::get('/admin/dashboard', function () {
     return view('dashboard');
 });
 
+//menu
+Route::get('/admin/menu', 'menuController@tampil');
+Route::post('/admin/menu', 'menuController@tambah');
+Route::put('/admin/menu', 'menuController@ubah');
+Route::delete('/admin/menu', 'menuController@hapus');
+
 //category
 Route::get('/admin/category', 'categoryController@tampil');
 Route::get('/admin/category-data', 'categoryController@data');
@@ -36,6 +42,7 @@ Route::delete('/admin/category', 'categoryController@hapus');
 
 //page
 Route::get('admin/page','pageController@tampil');
+Route::get('/admin/page-data', 'pageController@data');
 Route::delete('admin/page','pageController@hapus');
 Route::get('admin/new-page','pageController@dataNew');
 Route::post('admin/new-page','pageController@tambah');
@@ -49,7 +56,6 @@ Route::get('/admin/new-post', 'postController@dataNew');
 Route::post('/admin/new-post', 'postController@tambah');
 Route::get('/admin/edit-post/{id}', 'postController@editNew');
 Route::post('/admin/edit-post/{id}', 'postController@ubah');
-
 
 Route::get('/admin/logout', function () {
      Auth::logout();
