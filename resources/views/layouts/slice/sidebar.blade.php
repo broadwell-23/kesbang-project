@@ -8,18 +8,22 @@
                           <i class="fa fa-home"></i>
                           <span>Beranda</span>
                       </a>
-                  </li> 
+                  </li>
                   <li>
                       <a href="/admin/page">
                           <i class="fa fa-clone"></i>
                           <span>Halaman</span>
                       </a>
                   </li>
-                  <li>
-                      <a href="/admin/page">
+                  <li class="sub-menu">
+                       <a href="javascript:;">
                           <i class="fa  fa-thumb-tack"></i>
-                          <span>Postingan</span>
+                          <span>Postingan/Artikel</span>
                       </a>
+                      <ul class="sub">
+                        <li><a href="category">Kategori</a></li>
+                        <li><a href="new-post">Tambah Postingan/Artikel</a></li>
+                      </ul>
                   </li>
                   <li>
                       <a href="#">

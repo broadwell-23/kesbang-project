@@ -15,16 +15,17 @@ class CreateComment extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_post')->unsigned();
-            $table->unique('id_post');
-            $table->foreign('id_post')->references('id')->on('posts')->onUpdate('cascade')->onDelete('cascade');
+            $table->integer('id_posts')->unsigned();
+            $table->foreign('id_posts')->references('id')->on('posts')->onUpdate('cascade')->onDelete('cascade');
             $table->integer('id_pages')->unsigned();
-            $table->unique('id_pages');
             $table->foreign('id_pages')->references('id')->on('pages')->onUpdate('cascade')->onDelete('cascade');
             $table->string('nama');
             $table->string('email');
             $table->string('judul');
             $table->longText('deskripsi');
+            $table->boolean('read');
+            $table->integer('parent')->unsigned();
+            $table->foreign('parent')->references('id')->on('comments')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });

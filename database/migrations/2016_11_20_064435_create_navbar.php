@@ -16,6 +16,7 @@ class CreateNavbar extends Migration
         Schema::create('navbars', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nama');
+            $table->string('link');
             $table->integer('id_category')->unsigned();
             $table->unique('id_category');
             $table->foreign('id_category')->references('id')->on('categorys')->onUpdate('cascade')->onDelete('cascade');

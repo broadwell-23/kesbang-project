@@ -19,6 +19,20 @@ Route::get('/admin/dashboard', function () {
     return view('dashboard');
 });
 
+//category
+Route::get('/admin/category', 'categoryController@tampil');
+Route::get('/admin/category-data', 'categoryController@data');
+Route::post('/admin/category', 'categoryController@tambah');
+Route::put('/admin/category', 'categoryController@ubah');
+Route::delete('/admin/category', 'categoryController@hapus');
+
+//post
+Route::get('/admin/new-post', 'postController@dataNew');
+Route::post('/admin/new-post', 'postController@dataNew');
+Route::get('/admin/edit-post/{id}', 'postController@editNew');
+
+Route::post('/admin/new-post', 'postController@tambah');
+
 Route::get('/admin/logout', function () {
      Auth::logout();
      return redirect('/');

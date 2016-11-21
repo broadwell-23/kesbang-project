@@ -16,8 +16,8 @@ class CreateArticle extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
             $table->string('judul');
-            $table->string('deksripsi');
-            $table->longText('SEOtitle');
+            $table->longText('deksripsi');
+            $table->string('SEOtitle');
             $table->longText('SEOdesc');
             $table->string('foto');
 
@@ -30,15 +30,17 @@ class CreateArticle extends Migration
                   ->onUpdate('cascade');
 
             $table->integer('author')->unsigned();
-            $table->rememberToken();
-            $table->timestamps();
-            $table->softDeletes();
             $table->unique('author');
             $table->foreign('author')
                   ->references('id')
                   ->on('users')
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
+
+            $table->tinyInteger('status');
+            $table->rememberToken();
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

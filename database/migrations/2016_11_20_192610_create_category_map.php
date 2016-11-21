@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Pages extends Migration
+class CreateCategoryMap extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,7 @@ class Pages extends Migration
      */
     public function up()
     {
-        Schema::create('pages', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('judul');
-            $table->longText('deksripsi');
-            $table->string('SEOtitle');
-            $table->longText('SEOdesc');
-            $table->string('foto');
-
+        Schema::create('postCategorys', function (Blueprint $table) {
             $table->integer('id_categorys')->unsigned();
             $table->unique('id_categorys');
             $table->foreign('id_categorys')
@@ -29,18 +22,16 @@ class Pages extends Migration
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
 
-            $table->integer('author')->unsigned();
-            $table->unique('author');
-            $table->foreign('author')
+            $table->integer('id_posts')->unsigned();
+            $table->unique('id_posts');
+            $table->foreign('id_posts')
                   ->references('id')
-                  ->on('users')
+                  ->on('posts')
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
 
-            $table->tinyInteger('status');
-            $table->rememberToken();
+
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -52,6 +43,6 @@ class Pages extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('pages');
+        Schema::dropIfExists('postCategorys');
     }
 }

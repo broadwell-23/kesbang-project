@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-
+use App\categorys;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,4 +15,9 @@ use Illuminate\Http\Request;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
+})->middleware('auth:api');
+
+Route::get('/admin/category', function (Request $request) {
+	$categorys = categorys::all();
+    return $categorys;
 })->middleware('auth:api');
