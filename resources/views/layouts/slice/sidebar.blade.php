@@ -9,6 +9,15 @@
                           <span>Beranda</span>
                       </a>
                   </li>
+<<<<<<< HEAD
+=======
+                  <li>
+                      <a href="/admin/user">
+                          <i class="fa fa-user"></i>
+                          <span>User</span>
+                      </a>
+                  </li> 
+>>>>>>> 4307268f2a2e25644fd07d5b20d6d2d27b22fd59
                   <li>
                       <a href="/admin/page">
                           <i class="fa fa-clone"></i>
