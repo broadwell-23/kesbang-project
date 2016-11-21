@@ -12,9 +12,9 @@ class categorys extends Model
 	use SoftDeletes;
     protected $dates = ['deleted_at'];
 
-    public function post()
+    public function postcategorys()
     {
-    	return $this->hasMany('App\posts','id_categorys','id');
+    	return $this->hasMany('App\postcategorys','id_categorys','id');
     }
 
     public function navbar()

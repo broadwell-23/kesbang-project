@@ -5,24 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\posts;
 use App\categorys;
+use App\postcategorys;
 
 class postController extends Controller
 {
 
     public function dataNew()
     {
-            $categorys = categorys::all();
             $judul = "Tambah";
-            return view('postingan.new-edit', ['categorys'=>$categorys, 'judul'=>$judul]);
-    }
-
-    public function editNew($id)
-    {
-            $categorys = categorys::all();
-            $posts = posts::with('categorys')->find($id);
-            $judul = "Edit";
-
-            return view('postingan.new-edit', ['categorys'=>$categorys,'posts'=>$posts, 'judul'=>$judul ]);
+            $id = null;
+            return view('postingan.new-edit', ['judul'=>$judul,'id'=>$id]);
     }
 
     public function tambah(Request $request)
@@ -39,7 +31,7 @@ class postController extends Controller
     	$post->deskripsi = $request->deskripsi;
 
     	if ($request->SEOtitle==null) {
-    		$SEOtitle = substr($request->judul, 0,50);
+    		$SEOtitle = strip_tags(substr($request->judul, 0,50));
     	} else {
     		$SEOtitle = $request->SEOtitle;
     	}
@@ -47,19 +39,91 @@ class postController extends Controller
     	$post->SEOtitle = $SEOtitle;
 
     	if ($request->SEOdesc==null) {
-    		$SEOdesc = substr($request->deskripsi, 0,160);
+    		$SEOdesc = rtrim(strip_tags(substr($request->deskripsi, 0,160)), "\r\n");
     	} else {
     		$SEOdesc = $request->SEOdesc;
     	}
 
+        $post->SEOtitle = $SEOtitle;
     	$post->SEOdesc = $SEOdesc;
     	$post->foto = $request->foto;
-        // $post->id_categorys = $request->category;
-        foreach ($request->id_category as $category) {
-            echo $category.",";
-        }
     	$post->author = $request->author;
     	$post->status = $status;
-    	// $post->save();
+    	$post->save();
+        $category = $request->category;
+        for($i=0;$i<count($category);$i++) {
+            $postcategorys = new postcategorys;
+            $postcategorys->id_posts = $post->id;
+            $postcategorys->id_categorys = $category[$i];
+            $postcategorys->save();
+        }
+        return redirect()->action('postController@tampil');
+    }
+
+    public function tampil()
+    {
+        $posts = posts::with('postcategory.category')->join('users', 'posts.author','=','users.id')->select('posts.*','users.name')->get();
+        return view('postingan.artikel',['posts'=>$posts]);
+    }
+
+    public function hapus(Request $request)
+    {
+        $posts = posts::find($request->id);
+        $posts->delete();
+        return redirect()->action('postController@tampil');
+    }
+
+    public function editNew($id)
+    {
+            $posts = posts::with('postcategory.category')->find($id);
+            $judul="Edit";
+            return view('postingan.new-edit', ['posts'=>$posts, 'judul'=>$judul , 'id'=>$id]);
+    }
+
+    public function ubah(Request $request)
+    {
+        $status;
+        if (isset($_POST['draft'])) {
+            $status = 0;
+        } else {
+            $status = 1;
+        }
+
+        $post = posts::find($request->id);
+        $post->judul = $request->judul;
+        $post->deskripsi = $request->deskripsi;
+
+        if ($request->SEOtitle==null) {
+            $SEOtitle = strip_tags(substr($request->judul, 0,50));
+        } else {
+            $SEOtitle = $request->SEOtitle;
+        }
+
+        $post->SEOtitle = $SEOtitle;
+
+        if ($request->SEOdesc==null) {
+            $SEOdesc = rtrim(strip_tags(substr($request->deskripsi, 0,160)), "\r\n");
+        } else {
+            $SEOdesc = $request->SEOdesc;
+        }
+
+        $post->SEOtitle = $SEOtitle;
+        $post->SEOdesc = $SEOdesc;
+        $post->foto = $request->foto;
+        $post->author = $request->author;
+        $post->status = $status;
+        $post->save();
+
+        $postcategory = postcategorys::where('id_posts',$post->id);
+        $postcategory->delete();
+
+        $category = $request->category;
+        for($i=0;$i<count($category);$i++) {
+            $postcategorys = new postcategorys;
+            $postcategorys->id_posts = $post->id;
+            $postcategorys->id_categorys = $category[$i];
+            $postcategorys->save();
+        }
+        return redirect()->action('postController@tampil');
     }
 }

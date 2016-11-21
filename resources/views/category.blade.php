@@ -39,8 +39,13 @@
                         <td>{{$no+1}}</td>
                         <td>{{$category->nama}}</td>
                         <td>
+                          @if($category->nama=="Tidak Ada Kategori")
+                          <button class="btn btn-xs btn-primary" data-toggle="modal" href="#modalUbah{{$category->id}}" disabled><i class="fa fa-pencil"></i></button>
+                          <button class="btn btn-xs btn-danger" data-toggle="modal" href="#modalHapus{{$category->id}}" disabled><i class="fa fa-trash"></i></button>
+                          @else
                           <button class="btn btn-xs btn-primary" data-toggle="modal" href="#modalUbah{{$category->id}}"><i class="fa fa-pencil"></i></button>
                           <button class="btn btn-xs btn-danger" data-toggle="modal" href="#modalHapus{{$category->id}}"><i class="fa fa-trash"></i></button>
+                          @endif
                         </td>
                       </tr>
                       @endforeach

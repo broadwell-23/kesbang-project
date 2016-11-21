@@ -34,12 +34,22 @@ Route::post('/admin/category', 'categoryController@tambah');
 Route::put('/admin/category', 'categoryController@ubah');
 Route::delete('/admin/category', 'categoryController@hapus');
 
-//post
-Route::get('/admin/new-post', 'postController@dataNew');
-Route::post('/admin/new-post', 'postController@dataNew');
-Route::get('/admin/edit-post/{id}', 'postController@editNew');
+//page
+Route::get('admin/page','pageController@tampil');
+Route::delete('admin/page','pageController@hapus');
+Route::get('admin/new-page','pageController@dataNew');
+Route::post('admin/new-page','pageController@tambah');
+Route::get('/admin/edit-page/{id}', 'pageController@editNew');
+Route::post('/admin/edit-page/{id}', 'pageController@ubah');
 
+//post
+Route::get('/admin/post', 'postController@tampil');
+Route::delete('/admin/post', 'postController@hapus');
+Route::get('/admin/new-post', 'postController@dataNew');
 Route::post('/admin/new-post', 'postController@tambah');
+Route::get('/admin/edit-post/{id}', 'postController@editNew');
+Route::post('/admin/edit-post/{id}', 'postController@ubah');
+
 
 Route::get('/admin/logout', function () {
      Auth::logout();

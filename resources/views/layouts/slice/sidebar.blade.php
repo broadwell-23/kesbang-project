@@ -9,15 +9,12 @@
                           <span>Beranda</span>
                       </a>
                   </li>
-<<<<<<< HEAD
-=======
                   <li>
                       <a href="/admin/user">
                           <i class="fa fa-user"></i>
                           <span>User</span>
                       </a>
                   </li> 
->>>>>>> 4307268f2a2e25644fd07d5b20d6d2d27b22fd59
                   <li>
                       <a href="/admin/page">
                           <i class="fa fa-clone"></i>
@@ -30,8 +27,9 @@
                           <span>Postingan/Artikel</span>
                       </a>
                       <ul class="sub">
-                        <li><a href="category">Kategori</a></li>
-                        <li><a href="new-post">Tambah Postingan/Artikel</a></li>
+                        <li><a href="/admin/post">Semua Postingan/Artikel</a></li>
+                        <li><a href="/admin/new-post">Tambah Postingan/Artikel</a></li>
+                        <li><a href="/admin/category">Kategori</a></li>
                       </ul>
                   </li>
                   <li>

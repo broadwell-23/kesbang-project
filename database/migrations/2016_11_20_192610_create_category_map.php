@@ -15,7 +15,6 @@ class CreateCategoryMap extends Migration
     {
         Schema::create('postCategorys', function (Blueprint $table) {
             $table->integer('id_categorys')->unsigned();
-            $table->unique('id_categorys');
             $table->foreign('id_categorys')
                   ->references('id')
                   ->on('categorys')
@@ -23,7 +22,6 @@ class CreateCategoryMap extends Migration
                   ->onUpdate('cascade');
 
             $table->integer('id_posts')->unsigned();
-            $table->unique('id_posts');
             $table->foreign('id_posts')
                   ->references('id')
                   ->on('posts')

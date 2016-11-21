@@ -17,7 +17,7 @@
   	<div class="col-lg-8">
       	<section class="panel">
          	 <header class="panel-heading">
-              <i class="fa fa-thumb-tack"></i>	{{$judul}} Postingan/Artikel
+              <i class="fa fa-clone"></i>	{{$judul}} Halaman
           	</header>
           	<div class="panel-body">
               <div class="container-fluid">
@@ -28,32 +28,26 @@
                     <input type="hidden" name="id" value="{{$id}}">
                     @endif
                     <div class="form-group">
-                      <label>Judul Artikel</label>
-                      <input id="judul" type="text" name="judul" class="form-control" maxlength="255" value="@if($id!=null){{$posts->judul}}@endif">
+                      <label>Judul Halaman</label>
+                      <input id="judul" type="text" name="judul" class="form-control" maxlength="255" value="@if($id!=null){{$pages->judul}}@endif">
                       <div id="hintjudul"></div>
-                    </div>
-                     <div class="form-group">
-                          <button type="button" class="btn btn-xs btn-success" data-toggle="modal" href="#modalTambah"><i class="fa fa-plus"></i></button>
-                          <label>Kategori</label>
-                          <div id="category" style="margin-top: 10px;">
-                          </div>
-                    </div>                    
+                    </div>                   
                     <div class="form-group">
-                      <label>Deskripsi Artikel</label>
+                      <label>Deskripsi Halaman</label>
                       <div id="hint" class="help-blocks"></div>
-                      <textarea id="deskripsi" name="deskripsi">@if($id!=null){{$posts->deskripsi}}@endif</textarea>
+                      <textarea id="deskripsi" name="deskripsi" >@if($id!=null){{$pages->deskripsi}}@endif</textarea>
                     </div>
                     <hr>
                     <div class="form-group">
                       <label>Judul SEO (SEO Title)</label>
-                      <input type="text" id="SEOtitle" name="seotitle" class="form-control" maxlength="60" onkeyup="countTitle()" value="@if($id!=null){{$posts->SEOtitle}}@endif">
-                      <p class="help-block" style="color: blue;">Jika dikosongkan, maka akan mengambil judul artikel..</p>
+                      <input type="text" id="SEOtitle" name="seotitle" class="form-control" maxlength="60" onkeyup="countTitle()" value="@if($id!=null){{$pages->SEOtitle}}@endif">
+                      <p class="help-block" style="color: blue;">Jika dikosongkan, maka akan mengambil judul Halaman..</p>
                       <div id="countTitle" class="pull-right" style=""><strong>0</strong></div>
                     </div>
                     <div class="form-group">
                       <label>Deskripsi SEO (SEO Description)</label>
-                      <textarea id="SEOdesc" name="seodesc" class="form-control" maxlength="160" rows="5" onkeyup="count()">@if($id!=null){{$posts->SEOdesc}}@endif</textarea>
-                      <p class="help-block" style="color: blue;">Jika dikosongkan, maka akan mengambil deskripsi artikel..</p>
+                      <textarea id="SEOdesc" name="seodesc" class="form-control" maxlength="160" rows="5" onkeyup="count()">@if($id!=null){{$pages->SEOdesc}}@endif</textarea>
+                      <p class="help-block" style="color: blue;">Jika dikosongkan, maka akan mengambil deskripsi Halaman..</p>
                       <div id="count" class="pull-right" style=""><strong>0</strong></div>
                     </div>
               </div>
@@ -75,11 +69,11 @@
                         <i class="fa fa-picture-o"></i> Pilih
                       </a>
                     </span>
-                    <input id="thumbnail" class="form-control" type="text" name="foto" value="@if($id!=null){{$posts->foto}}@endif">
+                    <input id="thumbnail" class="form-control" type="text" name="foto" value="@if($id!=null){{$pages->foto}}@endif">
                   </div>
                   <div id="hintThumb"></div>
                   <div class="container-fluid">
-                    <center><img id="holder" style="margin-top:15px;max-height:100px;" src="@if($id!=null){{$posts->foto}}@endif"></center>
+                    <center><img id="holder" style="margin-top:15px;max-height:100px;" src="@if($id!=null){{$pages->foto}}@endif"></center>
                   </div>
             </div>            
             <div class="form-group">
@@ -92,39 +86,6 @@
       </section>
     </div>
 </div>
-
-<!-- MODAL COLLECTIONS -->
-
-  <!-- Modal Tambah -->
-  <div class="modal fade" id="modalTambah" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-          <div class="modal-content">
-              <div class="modal-header" style="background-color: green;">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                  <h4 class="modal-title">Tambah User</h4>
-              </div>
-              <div class="modal-body">
-
-                <form id="tambahKategori" role="form" action="#" onsubmit="return tambahKategori(this)">
-                  <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
-                  <div class="form-group">
-                    <label class="control-label">Nama Kategori</label>
-                    <input type="text" name="nama" class="form-control">
-                  </div>
-
-                  <div class="modal-footer">
-                      <button type="submit" class="btn btn-success">Tambah <i class="fa fa-chevron-right"></i></button>
-                  </div>
-
-                </form>
-
-              </div>
-          </div>
-      </div>
-  </div>
-  <!-- END modal tambah-->
-<!-- END MODAL COLLECTIONS -->
 @endsection
 
 @push('js')
@@ -210,53 +171,4 @@
       }
     </script>
 
-    <!-- untok category -->
-    <script type="text/javascript">
-      $('#category').ready(loadCategory());
-      function loadCategory() {
-            $.ajax({
-
-              type:"GET",
-              url:'/admin/category-data',
-              dataType: 'json',
-              success: function(data){
-                  // console.log(data);
-                  var arrayCategory= data;
-                  var category = "";
-                  for(i=0;i<arrayCategory.length;i++){
-                    if(i==0){
-                     category += '<input name="category[]" value="'+arrayCategory[i]["id"]+'" type="checkbox" checked/> '+arrayCategory[i]["nama"]+' ';
-                    } else {
-                     category += '<input name="category[]" value="'+arrayCategory[i]["id"]+'" type="checkbox"/> '+arrayCategory[i]["nama"]+' ';
-                    }
-                  }
-                  if (category=="") {
-                  document.getElementById("category").innerHTML = '<div class="container-fluid" style="border: 2px solid;border-radius: 25px; padding:5px;color:red;"><center><strong>Kategori Kosong</strong></center></div>';
-                  } else {
-                  document.getElementById("category").innerHTML = category;
-                  }
-              },
-              error: function(e) {
-                console.log("error");
-              }
-          });
-      }
-      function tambahKategori(data) {
-        // console.log($(data).serialize());
-         $.ajax({
-
-              type:"POST",
-              url:'/admin/category',
-              data:$(data).serialize(),
-              dataType: 'json',
-              success: function(data){
-                  console.log(data);
-              },
-          });
-         loadCategory();
-         $('#modalTambah').modal('hide');
-         $('#modalTambah').val('hide');
-         return false;
-      }
-    </script>
 @endpush

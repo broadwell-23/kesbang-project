@@ -14,65 +14,57 @@
 
 @section('content')
 <div class="row">
-    <div class="col-lg-12">
-        <section class="panel">
-           <header class="panel-heading">
-              <i class="fa fa-thumb-tack"></i> Postingan/Artikel
-            </header>
-            <div class="panel-body">
+  	<div class="col-lg-12">
+      	<section class="panel">
+         	 <header class="panel-heading">
+              <i class="fa fa-clone"></i>	Halaman
+          	</header>
+          	<div class="panel-body">
               <div class="container-fluid">
                 <div class="pull-right">
-                  <a href="new-post"><button class="btn btn-success"><i class="fa fa-plus"></i> Tambah</button></a>
+                  <a href="new-page"><button class="btn btn-success"><i class="fa fa-plus"></i> Tambah</button></a>
                 </div>
                 <div class="adv-table">
-                  <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered table-striped table-advance table-hover" id="postingan">
+                  <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered table-striped table-advance table-hover" id="halaman">
                     <thead>
                       <tr>
                           <th>No</th>
                           <th>Judul</th>
                           <th>Deskripsi</th>
-                          <th>Kategori</th>
                           <th>Author</th>
                           <th>Tanggal</th>
                       </tr>
                     </thead>
                     <tbody>
-                      @foreach($posts as $no => $post)
+                      @foreach($pages as $no => $page)
                       <tr>
                         <td>{{$no+1}}</td>
-                        <td><p>{{substr($post->judul, 0,50)}}</p><p><button class="btn btn-xs btn-danger" data-toggle="modal" href="#modalHapus{{$post->id}}"><i class="fa fa-trash"></i></button> <a href="edit-post/{{$post->id}}"><button class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i></button></a></p></td>
-                        <td>{{rtrim(strip_tags(substr($post->deskripsi, 0,100)),"\r\n")}}</td>
-                        <td>
-                          {{$cat=""}}
-                          @foreach($post->postcategory as $category)
-                          <?php $cat .= $category->category->nama."," ?>
-                          @endforeach
-                          {{rtrim($cat,",")}}
-                        </td>
-                        <td>{{$post->name}}</td>
+                        <td><p>{{substr($page->judul, 0,50)}}</p><p><button class="btn btn-xs btn-danger" data-toggle="modal" href="#modalHapus{{$page->id}}"><i class="fa fa-trash"></i></button> <a href="edit-page/{{$page->id}}"><button class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i></button></a></p></td>
+                        <td>{{rtrim(strip_tags(substr($page->deskripsi, 0,100)),"\r\n")}}</td>
+                        <td>{{$page->user->name}}</td>
                         <td><p>
-                        @if($post->status==0)
+                        @if($page->status==0)
                           <strong style="color: red;">Draft</strong>
                         @else
                           <strong style="color: green;">Terkirim</strong>
                         @endif
-                        </p><p>{{$post->created_at}}</p></td>
+                        </p><p>{{$page->created_at}}</p></td>
                       </tr>
                       @endforeach
                     </tbody>
                   </table>
               </div>
-            </div>
-        </section>
-    </div>
+          	</div>
+      	</section>
+  	</div>
 </div>
 
 <!-- MODAL COLLECTIONS -->
 
-  @foreach($posts as $post)
+  @foreach($pages as $page)
 
     <!-- Modal hapus -->
-    <div class="modal fade" id="modalHapus{{$post->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modalHapus{{$page->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header" style="background-color: red;">
@@ -84,11 +76,11 @@
                   <form method="POST">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input type="hidden" name="_method" value="DELETE">
-                    <input type="hidden" name="id" value="{{$post->id}}">
+                    <input type="hidden" name="id" value="{{$page->id}}">
 
                     <center>
                       <p>Apakah anda yakin akan menghapus Halaman</p>
-                      <p><strong>{{$post->judul}}</strong> ?</p>
+                      <p><strong>{{$page->judul}}</strong> ?</p>
                     </center>
 
                     <div class="modal-footer">
@@ -126,7 +118,7 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
-    $('#postingan').dataTable();
+    $('#halaman').dataTable();
   });
 </script>
 @endpush

@@ -11,9 +11,9 @@ class posts extends Model
 	use SoftDeletes;
     protected $dates = ['deleted_at'];
 
-    public function category()
+    public function postcategory()
     {
-    	return $this->belongsTo('App\categorys','id_categorys');
+    	return $this->hasMany('App\postcategorys','id_posts','id');
     }
 
     public function comment()

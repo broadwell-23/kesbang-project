@@ -18,7 +18,6 @@ class CreateNavbar extends Migration
             $table->string('nama');
             $table->string('link');
             $table->integer('id_category')->unsigned();
-            $table->unique('id_category');
             $table->foreign('id_category')->references('id')->on('categorys')->onUpdate('cascade')->onDelete('cascade');
             $table->integer('id_pages')->unsigned();
             $table->unique('id_pages');

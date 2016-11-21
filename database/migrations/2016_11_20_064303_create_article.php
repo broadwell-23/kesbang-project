@@ -16,21 +16,12 @@ class CreateArticle extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
             $table->string('judul');
-            $table->longText('deksripsi');
+            $table->longText('deskripsi');
             $table->string('SEOtitle');
             $table->longText('SEOdesc');
             $table->string('foto');
 
-            $table->integer('id_categorys')->unsigned();
-            $table->unique('id_categorys');
-            $table->foreign('id_categorys')
-                  ->references('id')
-                  ->on('categorys')
-                  ->onDelete('cascade')
-                  ->onUpdate('cascade');
-
             $table->integer('author')->unsigned();
-            $table->unique('author');
             $table->foreign('author')
                   ->references('id')
                   ->on('users')
@@ -38,7 +29,6 @@ class CreateArticle extends Migration
                   ->onUpdate('cascade');
 
             $table->tinyInteger('status');
-            $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
         });

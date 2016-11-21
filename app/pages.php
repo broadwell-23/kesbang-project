@@ -15,4 +15,9 @@ class pages extends Model
     {
     	return $this->hasMany('App\navbars','id_pages','id');
     }
+
+    public function user()
+    {
+    	return $this->belongsTo('App\User','author');
+    }
 }

@@ -15,7 +15,6 @@ class CreateTagsPost extends Migration
     {
         Schema::create('tagsPosts', function (Blueprint $table) {
             $table->integer('id_tags')->unsigned();
-            $table->unique('id_tags');
             $table->foreign('id_tags')
                   ->references('id')
                   ->on('tags')
@@ -23,7 +22,6 @@ class CreateTagsPost extends Migration
                   ->onUpdate('cascade');
 
             $table->integer('id_posts')->unsigned();
-            $table->unique('id_posts');
             $table->foreign('id_posts')
                   ->references('id')
                   ->on('posts')
