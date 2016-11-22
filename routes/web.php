@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'WebController@index');
 
 Route::get('/admin', function () {
 		if(Auth::check()){
@@ -21,7 +19,7 @@ Route::get('/admin', function () {
 		} else {
     	return view('auth.login');
     }
-	});
+});
 
 Route::get('/admin/dashboard', function () {
     return view('dashboard');
