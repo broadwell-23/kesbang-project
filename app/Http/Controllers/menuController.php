@@ -32,10 +32,13 @@ class menuController extends Controller
     public function ubah(Request $request)
     {
     	$navbars = navbars::find($request->id);
-    	$navbars->nama = $request->nama;
-    	$navbars->save();
-    	return redirect()->action('menuController@tampil');
-    }
+        $navbars->text = $request->text;
+        $navbars->link = $request->link;
+        if($request->parent!=null){
+            $navbars->parent = $request->parent;
+        }
+        $navbars->save();
+        return redirect()->action('menuController@tampil');    }
 
     public function hapus(Request $request)
     {

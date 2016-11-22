@@ -24,12 +24,12 @@
                   <li class="sub-menu">
                        <a href="javascript:;">
                           <i class="fa  fa-thumb-tack"></i>
-                          <span>Postingan/Artikel</span>
+                          <span>Kecamatan</span>
                       </a>
                       <ul class="sub">
-                        <li><a href="/admin/post">Semua Postingan/Artikel</a></li>
-                        <li><a href="/admin/new-post">Tambah Postingan/Artikel</a></li>
-                        <li><a href="/admin/category">Kategori</a></li>
+                        <li><a href="/admin/post">Data Kecamatan</a></li>
+                        <li><a href="/admin/new-post">Data Agama</a></li>
+                        <li><a href="/admin/category">Data Aliran Sesat</a></li>
                       </ul>
                   </li>
                   <li>
