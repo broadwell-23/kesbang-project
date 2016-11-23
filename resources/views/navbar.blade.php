@@ -138,36 +138,6 @@
                     <label class="control-label">Text</label>
                     <input type="text" name="text" class="form-control" value="{{$navbar->text}}" required>
                   </div>
-                  <div class="form-group">
-                    <label class="control-label">Tipe</label>
-                    <select class="form-control">
-                      <option value="0" selected="">Link</option>
-                      <option value="1">Halaman</option>
-                      <option value="2">Kategori</option>
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <div id="form">
-                      <div id="link">
-                        <label class="control-label">Link</label>
-                        <input type="url" name="link" class="form-control" required>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label">Parent</label>
-                    @if(!$navbars->isEmpty())
-                      <select class="form-control" name="parent">
-                        <option value="" selected=""></option>
-                        @foreach($navbars as $navbar)
-                          <option value="{{$navbar->id}}">{{$navbar->text}}</option>
-                        @endforeach
-                      </select>
-                    @else
-                      <div class="container-fluid" style="border: 2px solid;border-radius: 25px; padding:5px;color:red;"><center><strong>Menu Kosong</strong></center></div>
-                      <input type="hidden" name="parent" value="">
-                    @endif
-                  </div>
 
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Ubah <i class="fa fa-chevron-right"></i></button>

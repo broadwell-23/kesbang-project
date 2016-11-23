@@ -25,6 +25,18 @@ Route::get('/admin/dashboard', function () {
     return view('dashboard');
 });
 
+//agama
+Route::get('/admin/agama', 'agamaController@tampil');
+Route::post('/admin/agama', 'agamaController@tambah');
+Route::put('/admin/agama', 'agamaController@ubah');
+Route::delete('/admin/agama', 'agamaController@hapus');
+
+//kecamatan
+Route::get('/admin/kecamatan', 'kecamatanController@tampil');
+Route::post('/admin/kecamatan', 'kecamatanController@tambah');
+Route::put('/admin/kecamatan', 'kecamatanController@ubah');
+Route::delete('/admin/kecamatan', 'kecamatanController@hapus');
+
 //menu
 Route::get('/admin/menu', 'menuController@tampil');
 Route::post('/admin/menu', 'menuController@tambah');

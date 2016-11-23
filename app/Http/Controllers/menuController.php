@@ -33,10 +33,6 @@ class menuController extends Controller
     {
     	$navbars = navbars::find($request->id);
         $navbars->text = $request->text;
-        $navbars->link = $request->link;
-        if($request->parent!=null){
-            $navbars->parent = $request->parent;
-        }
         $navbars->save();
         return redirect()->action('menuController@tampil');    }
 
