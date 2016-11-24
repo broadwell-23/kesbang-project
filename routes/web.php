@@ -91,3 +91,7 @@ Route::get('admin/gallery', 'GalleryController@index');
 Route::post('admin/gallery', 'GalleryController@store');
 Route::put('admin/gallery', 'GalleryController@update');
 Route::delete('admin/gallery', 'GalleryController@destroy');
+
+// ABOUT
+Route::get('admin/about', 'AboutController@index');
+Route::put('admin/about', 'AboutController@update');

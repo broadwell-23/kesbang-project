@@ -69,6 +69,12 @@
                       </a>
                   </li>
                   <li>
+                      <a href="/admin/about">
+                          <i class="fa fa-question"></i>
+                          <span>About</span>
+                      </a>
+                  </li>
+                  <li>
                       <a href="/admin/slider">
                           <i class="fa fa-play-circle"></i>
                           <span>Slider</span>
