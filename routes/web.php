@@ -21,9 +21,7 @@ Route::get('/admin', function () {
     }
 });
 
-Route::get('/admin/dashboard', function () {
-    return view('dashboard');
-});
+Route::get('/admin/dashboard', 'DashboardController@index');
 
 //agama
 Route::get('/admin/agama', 'agamaController@tampil');
@@ -82,4 +80,14 @@ Route::post('admin/user', 'UserController@store');
 Route::put('admin/user', 'UserController@update');
 Route::delete('admin/user', 'UserController@destroy');
 
+// SLIDER
+Route::get('admin/slider', 'SliderController@index');
+Route::post('admin/slider', 'SliderController@store');
+Route::put('admin/slider', 'SliderController@update');
+Route::delete('admin/slider', 'SliderController@destroy');
 
+// GALLERY
+Route::get('admin/gallery', 'GalleryController@index');
+Route::post('admin/gallery', 'GalleryController@store');
+Route::put('admin/gallery', 'GalleryController@update');
+Route::delete('admin/gallery', 'GalleryController@destroy');

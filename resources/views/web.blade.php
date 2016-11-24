@@ -71,7 +71,6 @@
 						<ul class="social-icons">
 							<li class="facebook"><a href="http://www.facebook.com/" target="_blank" title="Facebook">Facebook</a></li>
 							<li class="twitter"><a href="http://www.twitter.com/" target="_blank" title="Twitter">Twitter</a></li>
-							<li class="linkedin"><a href="http://www.linkedin.com/" target="_blank" title="Linkedin">Linkedin</a></li>
 						</ul>
 						<nav class="nav-main">
 							<ul class="nav nav-pills nav-main" id="mainMenu">

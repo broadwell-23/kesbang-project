@@ -69,11 +69,17 @@
                       </a>
                   </li>
                   <li>
-                      <a href="#">
-                          <i class="fa fa-exchange"></i>
-                          <span>Slide</span>
+                      <a href="/admin/slider">
+                          <i class="fa fa-play-circle"></i>
+                          <span>Slider</span>
                       </a>
                   </li>
+                  <li>
+                      <a href="/admin/gallery">
+                          <i class="fa fa-photo"></i>
+                          <span>Gallery</span>
+                      </a>
+                  </li>  
                   <li>
                       <a href="#">
                           <i class="fa fa-puzzle-piece"></i>
@@ -85,7 +91,7 @@
                           <i class="fa fa-user"></i>
                           <span>User</span>
                       </a>
-                  </li> 
+                  </li>
                   <li>
                       <a href="#">
                           <i class="fa fa-wrench"></i>
