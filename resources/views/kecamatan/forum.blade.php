@@ -17,52 +17,51 @@
     <div class="col-lg-12">
         <section class="panel">
            <header class="panel-heading">
-              <i class="fa fa-database"></i> Data Agama
+              <i class="fa fa-database"></i> Data Forum
             </header>
             <div class="panel-body">
               <div class="container-fluid">
               <div class="pull-left">
-                @if($_GET['success']==1)
-                  <div class="alert alert-block alert-danger fade in">
-                        <button data-dismiss="alert" class="close close-sm" type="button">
-                            <i class="fa fa-times"></i>
-                        </button>
-                        <strong>Data Sudah Ada!</strong> Pilih Kecamatan Lain atau Ubah Data Kecamatan tersebut.
-                  </div>
-                @endif
               </div>
                 <div class="pull-right">
                   <button class="btn btn-success" data-toggle="modal" href="#modalTambah"><i class="fa fa-plus"></i> Tambah</button>
                 </div>
                 <div class="adv-table">
-                  <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered table-striped table-advance table-hover" id="agama">
+                  <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered table-striped table-advance table-hover" id="forum" style="text-align: center;">
                     <thead>
                       <tr>
                           <th>No</th>
+                          <th>Nama</th>
+                          <th>Tahun Daftar</th>
                           <th>Nama Kecamatan</th>
-                          <th>Islam</th>
-                          <th>Katolik</th>
-                          <th>Kristen Protestan</th>
-                          <th>Hindu</th>
-                          <th>Budha</th>
+                          <th>Laporan</th>
+                          <th>Alamat</th>
+                          <th>Tipe</th>
                       </tr>
                     </thead>
                     <tbody>
-                      @foreach($agamas as $no => $agama)
+                      @foreach($forums as $no => $forum)
                       <tr>
                         <td>{{$no+1}}</td>
                         <td>
-                          <p>{{$agama->kecamatan->nama}}</p>
+                          <p>{{$forum->nama}}</p>
                           <p>
-                            <button class="btn btn-xs btn-primary" data-toggle="modal" href="#modalUbah{{$agama->id_kecamatan}}"><i class="fa fa-pencil"></i></button>
-                            <button class="btn btn-xs btn-danger" data-toggle="modal" href="#modalHapus{{$agama->id_kecamatan}}"><i class="fa fa-trash"></i></button>
+                            <button class="btn btn-xs btn-primary" data-toggle="modal" href="#modalUbah{{$forum->id}}"><i class="fa fa-pencil"></i></button>
+                            <button class="btn btn-xs btn-danger" data-toggle="modal" href="#modalHapus{{$forum->id}}"><i class="fa fa-trash"></i></button>
+                            <a href="/admin/pengurus-forum/{{$forum->id}}"><button class="btn btn-xs btn-success"><i class="fa fa-info"></i> Pengurus</button></a>
                           </p>
                         </td>
-                        <td>{{$agama->islam}}</td>
-                        <td>{{$agama->katolik}}</td>
-                        <td>{{$agama->kristen}}</td>
-                        <td>{{$agama->hindu}}</td>
-                        <td>{{$agama->budha}}</td>
+                        <td>{{$forum->tahun_daftar}}</td>
+                        <td>{{$forum->kecamatan->nama}}</td>
+                        <td>{{$forum->laporan}}</td>
+                        <td>{{$forum->alamat}}</td>
+                        <td style="text-align: center;">
+                          @if($forum->tipe==0)
+                              <span class="label label-warning">Forum</span>
+                          @else
+                              <span class="label label-primary">LSM (Lembaga Swadaya Masyarakat)</span>
+                          @endif
+                        </td>
                       </tr>
                       @endforeach
                     </tbody>
@@ -81,13 +80,32 @@
           <div class="modal-content">
               <div class="modal-header" style="background-color: green;">
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                  <h4 class="modal-title">Tambah agama</h4>
+                  <h4 class="modal-title">Tambah Forum</h4>
               </div>
               <div class="modal-body">
 
                 <form method="POST">
                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
+                  <div class="form-group">
+                    <label class="control-label">Tipe</label>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="tipe" value="0" checked>
+                            Forum
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="tipe" value="1">
+                            LSM ( Lembaga Swadaya Masyarakat)
+                        </label>
+                    </div>
+                  </div>                  
+                  <div class="form-group">
+                    <label class="control-label">Nama</label>
+                    <input type="text" name="nama" class="form-control" maxlength="255">
+                  </div>
                   <div class="form-group">
                   <label class="control-label">Nama Kecamatan</label>
                     <select class="form-control" name="id_kecamatan">
@@ -97,24 +115,16 @@
                     </select>
                   </div>
                   <div class="form-group">
-                    <label class="control-label">Islam</label>
-                    <input type="number" name="islam" class="form-control" min="0" value="0" required="">
+                    <label class="control-label">Tahun Daftar</label>
+                    <input type="date" name="tahun_daftar" class="form-control">
                   </div>
                   <div class="form-group">
-                    <label class="control-label">Katolik</label>
-                    <input type="number" name="katolik" class="form-control" min="0" value="0" required="">
+                    <label class="control-label">Laporan</label>
+                    <input type="text" name="laporan" class="form-control" maxlength="255">
                   </div>
                   <div class="form-group">
-                    <label class="control-label">Kristen Protestan</label>
-                    <input type="number" name="kristen" class="form-control" min="0" value="0" required="">
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label">Hindu</label>
-                    <input type="number" name="hindu" class="form-control" min="0" value="0" required="">
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label">Budha</label>
-                    <input type="number" name="budha" class="form-control" min="0" value="0" required="">
+                    <label class="control-label">Alamat</label>
+                    <textarea class="form-control" name="alamat" rows="5"></textarea>
                   </div>
 
                   <div class="modal-footer">
@@ -129,53 +139,64 @@
   </div>
   <!-- END modal tambah-->
 
-  @foreach($agamas as $agama)
+  @foreach($forums as $forum)
     <!-- Modal ubah -->
-    <div class="modal fade" id="modalUbah{{$agama->id_kecamatan}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modalUbah{{$forum->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Ubah Agama</h4>
+                    <h4 class="modal-title">Ubah Forum</h4>
                 </div>
                 <div class="modal-body">
 
                   <form method="POST">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input type="hidden" name="_method" value="PUT">
-                    <input type="hidden" name="id" value="{{$agama->id_kecamatan}}">
+                    <input type="hidden" name="id" value="{{$forum->id}}">
 
                     <div class="form-group">
-                      <label class="control-label">Nama Kecamatan</label>
-                      <select class="form-control" name="id_kecamatan">
+                    <label class="control-label">Tipe</label>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="tipe" value="0" @if($forum->tipe==0) checked @endif >
+                            Forum
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="tipe" value="1" @if($forum->tipe==1) checked @endif >
+                            LSM ( Lembaga Swadaya Masyarakat)
+                        </label>
+                    </div>
+                  </div>                  
+                  <div class="form-group">
+                    <label class="control-label">Nama</label>
+                    <input type="text" name="nama" class="form-control" maxlength="255" value="{{$forum->nama}}">
+                  </div>
+                  <div class="form-group">
+                  <label class="control-label">Nama Kecamatan</label>
+                    <select class="form-control" name="id_kecamatan">
                       @foreach($kecamatans as $kecamatan)
-                        @if($agama->kecamatan->id==$kecamatan->id)
+                        @if($forum->kecamatan->id==$kecamatan->id)
                           <option value="{{$kecamatan->id}}" selected="">{{$kecamatan->nama}}</option>
                           @else
                           <option value="{{$kecamatan->id}}">{{$kecamatan->nama}}</option>
                         @endif
                       @endforeach
-                      </select>
-                    </div>
-                    <div class="form-group">
-                    <label class="control-label">Islam</label>
-                    <input type="number" name="islam" class="form-control" min="0" value="{{$agama->islam}}" required="">
+                    </select>
                   </div>
                   <div class="form-group">
-                    <label class="control-label">Katolik</label>
-                    <input type="number" name="katolik" class="form-control" min="0" value="{{$agama->katolik}}" required="">
+                    <label class="control-label">Tahun Daftar</label>
+                    <input type="date" name="tahun_daftar" class="form-control" value="{{$forum->tahun_daftar}}">
                   </div>
                   <div class="form-group">
-                    <label class="control-label">Kristen Protestan</label>
-                    <input type="number" name="kristen" class="form-control" min="0" value="{{$agama->kristen}}" required="">
+                    <label class="control-label">Laporan</label>
+                    <input type="text" name="laporan" class="form-control" maxlength="255" value="{{$forum->laporan}}">
                   </div>
                   <div class="form-group">
-                    <label class="control-label">Hindu</label>
-                    <input type="number" name="hindu" class="form-control" min="0" value="{{$agama->hindu}}" required="">
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label">Budha</label>
-                    <input type="number" name="budha" class="form-control" min="0" value="{{$agama->budha}}" required="">
+                    <label class="control-label">Alamat</label>
+                    <textarea class="form-control" name="alamat" rows="5">{{$forum->alamat}}</textarea>
                   </div>
 
                     <div class="modal-footer">
@@ -191,23 +212,24 @@
     <!-- END modal ubah-->
 
     <!-- Modal hapus -->
-    <div class="modal fade" id="modalHapus{{$agama->id_kecamatan}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modalHapus{{$forum->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header" style="background-color: red;">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Hapus Agama</h4>
+                    <h4 class="modal-title">Hapus Forum</h4>
                 </div>
                 <div class="modal-body">
 
                   <form method="POST">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input type="hidden" name="_method" value="DELETE">
-                    <input type="hidden" name="id" value="{{$agama->id_kecamatan}}">
+                    <input type="hidden" name="id" value="{{$forum->id}}">
 
                     <center>
-                      <p>Apakah anda yakin akan menghapus data agama Kecamatan</p>
-                      <p><strong>{{$agama->kecamatan->nama}}</strong> ?</p>
+                      <p>Apakah anda yakin akan menghapus data Forum</p>
+                      <p><strong>Nama : {{$forum->nama}}</strong></p>
+                      <p><strong>Kecamatan : {{$forum->kecamatan->nama}}</strong> ?</p>
                     </center>
 
                     <div class="modal-footer">
@@ -245,7 +267,7 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
-    $('#agama').dataTable();
+    $('#forum').dataTable();
   });
 </script>
 @endpush

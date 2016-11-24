@@ -15,7 +15,7 @@ class CreateAsing extends Migration
     {
         Schema::create('asings', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_kecamatan')->unique()->unsigned();
+            $table->integer('id_kecamatan')->unsigned();
             $table->foreign('id_kecamatan')->references('id')->on('kecamatans')->onUpdate('cascade')->ondelete('cascade');
             $table->string('nama');
             $table->char('jk',1);

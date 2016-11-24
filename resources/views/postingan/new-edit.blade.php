@@ -101,7 +101,7 @@
           <div class="modal-content">
               <div class="modal-header" style="background-color: green;">
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                  <h4 class="modal-title">Tambah User</h4>
+                  <h4 class="modal-title">Tambah Kategori</h4>
               </div>
               <div class="modal-body">
 

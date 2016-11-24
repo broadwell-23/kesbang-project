@@ -38,9 +38,10 @@
                       <tr>
                         <td>{{$no+1}}</td>
                         <td>{{$kecamatan->nama}}</td>
-                        <td>
+                        <td style="text-align: center;">
                           <button class="btn btn-xs btn-primary" data-toggle="modal" href="#modalUbah{{$kecamatan->id}}"><i class="fa fa-pencil"></i></button>
                           <button class="btn btn-xs btn-danger" data-toggle="modal" href="#modalHapus{{$kecamatan->id}}"><i class="fa fa-trash"></i></button>
+                          <a href="/admin/pengurus-kecamatan/{{$kecamatan->id}}"><button class="btn btn-xs btn-success"><i class="fa fa-info"></i> Pengurus</button></a>
                         </td>
                       </tr>
                       @endforeach

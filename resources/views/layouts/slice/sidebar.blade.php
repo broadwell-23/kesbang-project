@@ -29,14 +29,14 @@
                       <ul class="sub">
                         <li><a href="/admin/kecamatan">Data Kecamatan</a></li>
                         <li><a href="/admin/agama?success=0">Data Agama</a></li>
+                        <li><a href="/admin/etnis?success=0">Data Suku Bangsa/Etnis</a></li>
                         <li><a href="/admin/aliran">Data Aliran Sesat</a></li>
                         <li><a href="/admin/forum">Data LSM/Forum</a></li>
                         <li><a href="/admin/konflik">Data Konflik</a></li>
                         <li><a href="/admin/asing">Data Orang Asing</a></li>
-                        <li><a href="/admin/etnis">Data Suku Bangsa/Etnis</a></li>
-                        <li><a href="/admin/tomas">Toko Masyarakat</a></li>
-                        <li><a href="/admin/todat">Toko Adat</a></li>
-                        <li><a href="/admin/toga">Toko Agama</a></li>
+                        <li><a href="/admin/tomas">Tokoh Masyarakat</a></li>
+                        <li><a href="/admin/todat">Tokoh Adat</a></li>
+                        <li><a href="/admin/toga">Tokoh Agama</a></li>
                       </ul>
                   </li>
                   <li>

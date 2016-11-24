@@ -13,11 +13,14 @@ class CreateTodat extends Migration
      */
     public function up()
     {
-        Schema::create('todat', function (Blueprint $table) {
+        Schema::create('todats', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_kecamatan')->unique()->unsigned();
+            $table->integer('id_kecamatan')->unsigned();
             $table->foreign('id_kecamatan')->references('id')->on('kecamatans')->onUpdate('cascade')->ondelete('cascade');
             $table->string('nama');
+            $table->string('no_hp');
+            $table->longtext('alamat');
+
             $table->timestamps();
         });
     }
@@ -29,6 +32,6 @@ class CreateTodat extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('todat');
+        Schema::dropIfExists('todats');
     }
 }

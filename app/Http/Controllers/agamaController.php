@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\agamas;
 use App\kecamatans;
+use DB;
 
 class agamaController extends Controller
 {
@@ -22,6 +23,7 @@ class agamaController extends Controller
 
     public function tambah(Request $request)
     {
+        // DD($request);
     	$id_kecamatan = agamas::where('id_kecamatan',$request->id_kecamatan)->get();
         // DD($id_kecamatan);
     	if (!$id_kecamatan->isEmpty()) {
@@ -41,21 +43,23 @@ class agamaController extends Controller
 
     public function ubah(Request $request)
     {
-    	$agama = agamas::find($request->id);
-    	$agama->id_kecamatan = $request->id_kecamatan;
-    	$agama->islam = $request->islam;
-    	$agama->katolik = $request->katolik;
-    	$agama->kristen = $request->kristen;
-    	$agama->hindu = $request->hindu;
-    	$agama->budha = $request->budha;
-    	$agama->save();
-    	return redirect('agama?success=0');
+    	DB::table('agamas')
+            ->where('id_kecamatan', $request->id)
+            ->update([
+                'id_kecamatan' => $request->id_kecamatan,
+                'islam' => $request->islam,
+                'katolik' => $request->katolik,
+                'kristen' => $request->kristen,
+                'hindu' => $request->hindu,
+                'budha' => $request->budha,
+                'updated_at' => \Carbon\Carbon::now()
+                ]);
+    	return redirect('/admin/agama?success=0');
     }
 
     public function hapus(Request $request)
     {
-    	$agama = agamas::find($request->id);
-    	$agama->delete();
-    	return redirect('agama?success=0');
+    	DB::table('agamas')->where('id_kecamatan', '=', $request->id)->delete();
+    	return redirect('/admin/agama?success=0');
     }
 }

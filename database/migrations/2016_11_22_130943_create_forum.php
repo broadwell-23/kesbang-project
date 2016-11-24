@@ -15,12 +15,13 @@ class CreateForum extends Migration
     {
         Schema::create('forums', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_kecamatan')->unique()->unsigned();
+            $table->integer('id_kecamatan')->unsigned();
             $table->foreign('id_kecamatan')->references('id')->on('kecamatans')->onUpdate('cascade')->ondelete('cascade');
             $table->string('nama');
             $table->date('tahun_daftar');
             $table->string('laporan');
             $table->longtext('alamat');
+            $table->boolean('tipe');
             $table->timestamps();
         });
     }

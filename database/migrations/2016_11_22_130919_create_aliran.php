@@ -15,7 +15,7 @@ class CreateAliran extends Migration
     {
         Schema::create('alirans', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_kecamatan')->unique()->unsigned();
+            $table->integer('id_kecamatan')->unsigned();
             $table->foreign('id_kecamatan')->references('id')->on('kecamatans')->onUpdate('cascade')->ondelete('cascade');
             $table->string('nama');
             $table->integer('jumlah');

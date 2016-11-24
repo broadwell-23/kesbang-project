@@ -15,11 +15,13 @@ class PengurusForum extends Migration
     {
         Schema::create('urus_forums', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_forum')->unique()->unsigned();
+            $table->integer('id_forum')->unsigned();
             $table->foreign('id_forum')->references('id')->on('forums')->onUpdate('cascade')->ondelete('cascade');
             $table->string('nama');
             $table->string('jabatan');
             $table->string('foto');
+            $table->string('alamat');
+            $table->string('no_hp');
             $table->timestamps();
         });
     }

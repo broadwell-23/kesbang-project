@@ -17,52 +17,40 @@
     <div class="col-lg-12">
         <section class="panel">
            <header class="panel-heading">
-              <i class="fa fa-database"></i> Data Agama
+              <i class="fa fa-database"></i> Data konflik
             </header>
             <div class="panel-body">
               <div class="container-fluid">
               <div class="pull-left">
-                @if($_GET['success']==1)
-                  <div class="alert alert-block alert-danger fade in">
-                        <button data-dismiss="alert" class="close close-sm" type="button">
-                            <i class="fa fa-times"></i>
-                        </button>
-                        <strong>Data Sudah Ada!</strong> Pilih Kecamatan Lain atau Ubah Data Kecamatan tersebut.
-                  </div>
-                @endif
               </div>
                 <div class="pull-right">
                   <button class="btn btn-success" data-toggle="modal" href="#modalTambah"><i class="fa fa-plus"></i> Tambah</button>
                 </div>
                 <div class="adv-table">
-                  <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered table-striped table-advance table-hover" id="agama">
+                  <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered table-striped table-advance table-hover" id="konflik">
                     <thead>
                       <tr>
                           <th>No</th>
+                          <th>Potensi Konflik</th>
                           <th>Nama Kecamatan</th>
-                          <th>Islam</th>
-                          <th>Katolik</th>
-                          <th>Kristen Protestan</th>
-                          <th>Hindu</th>
-                          <th>Budha</th>
+                          <th>Keterangan</th>
+                          <th>Tanggal</th>
                       </tr>
                     </thead>
                     <tbody>
-                      @foreach($agamas as $no => $agama)
+                      @foreach($konfliks as $no => $konflik)
                       <tr>
                         <td>{{$no+1}}</td>
                         <td>
-                          <p>{{$agama->kecamatan->nama}}</p>
+                          <p>{{$konflik->potensi}}</p>
                           <p>
-                            <button class="btn btn-xs btn-primary" data-toggle="modal" href="#modalUbah{{$agama->id_kecamatan}}"><i class="fa fa-pencil"></i></button>
-                            <button class="btn btn-xs btn-danger" data-toggle="modal" href="#modalHapus{{$agama->id_kecamatan}}"><i class="fa fa-trash"></i></button>
+                            <button class="btn btn-xs btn-primary" data-toggle="modal" href="#modalUbah{{$konflik->id}}"><i class="fa fa-pencil"></i></button>
+                            <button class="btn btn-xs btn-danger" data-toggle="modal" href="#modalHapus{{$konflik->id}}"><i class="fa fa-trash"></i></button>
                           </p>
                         </td>
-                        <td>{{$agama->islam}}</td>
-                        <td>{{$agama->katolik}}</td>
-                        <td>{{$agama->kristen}}</td>
-                        <td>{{$agama->hindu}}</td>
-                        <td>{{$agama->budha}}</td>
+                        <td>{{$konflik->kecamatan->nama}}</td>
+                        <td>{{$konflik->keterangan}}</td>
+                        <td>{{$konflik->tanggal}}</td>
                       </tr>
                       @endforeach
                     </tbody>
@@ -81,7 +69,7 @@
           <div class="modal-content">
               <div class="modal-header" style="background-color: green;">
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                  <h4 class="modal-title">Tambah agama</h4>
+                  <h4 class="modal-title">Tambah konflik</h4>
               </div>
               <div class="modal-body">
 
@@ -90,31 +78,23 @@
 
                   <div class="form-group">
                   <label class="control-label">Nama Kecamatan</label>
-                    <select class="form-control" name="id_kecamatan">
+                    <select class="form-control" name="id_kecamatan" required="">
                       @foreach($kecamatans as $kecamatan)
                         <option value="{{$kecamatan->id}}">{{$kecamatan->nama}}</option>
                       @endforeach
                     </select>
                   </div>
                   <div class="form-group">
-                    <label class="control-label">Islam</label>
-                    <input type="number" name="islam" class="form-control" min="0" value="0" required="">
+                    <label class="control-label">Potensi Konflik</label>
+                    <input type="text" name="potensi" class="form-control" maxlength="255" required="">
                   </div>
                   <div class="form-group">
-                    <label class="control-label">Katolik</label>
-                    <input type="number" name="katolik" class="form-control" min="0" value="0" required="">
+                    <label class="control-label">Keterangan</label>
+                    <textarea id="keterangan" class="form-control" name="keterangan" required=""></textarea>
                   </div>
                   <div class="form-group">
-                    <label class="control-label">Kristen Protestan</label>
-                    <input type="number" name="kristen" class="form-control" min="0" value="0" required="">
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label">Hindu</label>
-                    <input type="number" name="hindu" class="form-control" min="0" value="0" required="">
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label">Budha</label>
-                    <input type="number" name="budha" class="form-control" min="0" value="0" required="">
+                    <label class="control-label">Tanggal</label>
+                    <input type="date" name="tanggal" class="form-control" required="">
                   </div>
 
                   <div class="modal-footer">
@@ -129,27 +109,27 @@
   </div>
   <!-- END modal tambah-->
 
-  @foreach($agamas as $agama)
+  @foreach($konfliks as $konflik)
     <!-- Modal ubah -->
-    <div class="modal fade" id="modalUbah{{$agama->id_kecamatan}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modalUbah{{$konflik->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Ubah Agama</h4>
+                    <h4 class="modal-title">Ubah Konflik</h4>
                 </div>
                 <div class="modal-body">
 
                   <form method="POST">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input type="hidden" name="_method" value="PUT">
-                    <input type="hidden" name="id" value="{{$agama->id_kecamatan}}">
+                    <input type="hidden" name="id" value="{{$konflik->id}}">
 
                     <div class="form-group">
                       <label class="control-label">Nama Kecamatan</label>
                       <select class="form-control" name="id_kecamatan">
                       @foreach($kecamatans as $kecamatan)
-                        @if($agama->kecamatan->id==$kecamatan->id)
+                        @if($konflik->kecamatan->id==$kecamatan->id)
                           <option value="{{$kecamatan->id}}" selected="">{{$kecamatan->nama}}</option>
                           @else
                           <option value="{{$kecamatan->id}}">{{$kecamatan->nama}}</option>
@@ -158,28 +138,20 @@
                       </select>
                     </div>
                     <div class="form-group">
-                    <label class="control-label">Islam</label>
-                    <input type="number" name="islam" class="form-control" min="0" value="{{$agama->islam}}" required="">
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label">Katolik</label>
-                    <input type="number" name="katolik" class="form-control" min="0" value="{{$agama->katolik}}" required="">
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label">Kristen Protestan</label>
-                    <input type="number" name="kristen" class="form-control" min="0" value="{{$agama->kristen}}" required="">
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label">Hindu</label>
-                    <input type="number" name="hindu" class="form-control" min="0" value="{{$agama->hindu}}" required="">
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label">Budha</label>
-                    <input type="number" name="budha" class="form-control" min="0" value="{{$agama->budha}}" required="">
-                  </div>
+                      <label class="control-label">Potensi Konflik</label>
+                      <input type="text" name="potensi" class="form-control" maxlength="255" value="{{$konflik->potensi}}" required="">
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label">Keterangan</label>
+                      <textarea id="keterangan{{$konflik->id}}" class="form-control" name="keterangan" required="">{{$konflik->keterangan}}</textarea>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label">Tanggal</label>
+                      <input type="date" name="tanggal" class="form-control" value="{{$konflik->tanggal}}" required="">
+                    </div>
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Ubah <i class="fa fa-chevron-right"></i></button>
+                        <button type="submit" class="btn btn-primary">Ubah <i class="fa fa-chevron-right" required=""></i></button>
                     </div>
 
                   </form>
@@ -191,23 +163,24 @@
     <!-- END modal ubah-->
 
     <!-- Modal hapus -->
-    <div class="modal fade" id="modalHapus{{$agama->id_kecamatan}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modalHapus{{$konflik->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header" style="background-color: red;">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Hapus Agama</h4>
+                    <h4 class="modal-title">Hapus Konflik</h4>
                 </div>
                 <div class="modal-body">
 
                   <form method="POST">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input type="hidden" name="_method" value="DELETE">
-                    <input type="hidden" name="id" value="{{$agama->id_kecamatan}}">
+                    <input type="hidden" name="id" value="{{$konflik->id}}">
 
                     <center>
-                      <p>Apakah anda yakin akan menghapus data agama Kecamatan</p>
-                      <p><strong>{{$agama->kecamatan->nama}}</strong> ?</p>
+                      <p>Apakah anda yakin akan menghapus data konflik</p>
+                      <p><strong>{{$konflik->potensi}}</strong></p>
+                      <p><strong>{{$konflik->kecamatan->nama}}</strong> ?</p>
                     </center>
 
                     <div class="modal-footer">
@@ -242,10 +215,31 @@
 
 <!--common script for all pages-->
 <script src="js/common-scripts.js"></script>
+<script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+<script src="/vendor/laravel-filemanager/js/lfm.js"></script>
+
+<script>
+        CKEDITOR.replace( 'keterangan' , {
+          filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+          filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token={{csrf_token()}}',
+          filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
+          filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token={{csrf_token()}}'
+        });
+        
+        @foreach($konfliks as $konflik)
+          CKEDITOR.replace( 'keterangan{{$konflik->id}}' , {
+            filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+            filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token={{csrf_token()}}',
+            filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
+            filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token={{csrf_token()}}'
+          });
+        @endforeach
+
+    </script>
 
 <script type="text/javascript">
   $(document).ready(function() {
-    $('#agama').dataTable();
+    $('#konflik').dataTable();
   });
 </script>
 @endpush
