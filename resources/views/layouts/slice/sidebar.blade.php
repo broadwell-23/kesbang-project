@@ -23,7 +23,7 @@
                   </li>
                   <li class="sub-menu">
                        <a href="javascript:;">
-                          <i class="fa  fa-database"></i>
+                          <i class="fa fa-database"></i>
                           <span>Kecamatan</span>
                       </a>
                       <ul class="sub">

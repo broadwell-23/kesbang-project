@@ -18,6 +18,7 @@
     <!-- Custom styles for this template -->
     <link href="/admin/css/style.css" rel="stylesheet">
     <link href="/admin/css/style-responsive.css" rel="stylesheet" />
+    
     @stack('css')
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
